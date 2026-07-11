@@ -10,3 +10,4 @@ Werkzeug==3.0.1
 Faker==21.0.0
 python-dotenv==1.0.0
 reportlab==4.0.8
+gunicorn==21.2.0
