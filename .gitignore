@@ -1,0 +1,28 @@
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# Databases
+*.sqlite3
+*.db
+
+# Dataset files (if you want to ignore large CSVs)
+# dataset/*.csv
+
+# Models (if large)
+# models/*.pkl
+# models/*.joblib

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - RetailIQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <script>
+        if(localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header"><i class="bi bi-graph-up-arrow me-2"></i> RetailIQ</div>
+        <div class="sidebar-nav">
+            <a href="index.html"><i class="bi bi-house"></i> Home</a>
+            <a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a href="upload.html"><i class="bi bi-cloud-upload"></i> Upload Dataset</a>
+            <a href="analytics.html"><i class="bi bi-bar-chart"></i> Analytics</a>
+            <a href="products.html" class="active"><i class="bi bi-box"></i> Products</a>
+            <a href="customers.html"><i class="bi bi-people"></i> Customers</a>
+            <a href="prediction.html"><i class="bi bi-cpu"></i> Sales Prediction</a>
+            <a href="reports.html"><i class="bi bi-file-earmark-pdf"></i> Reports</a>
+            <a href="about.html"><i class="bi bi-info-circle"></i> About</a>
+        </div>
+    </div>
+    <div class="topbar">
+        <div class="welcome-text">Product Performance</div>
+        <div class="right-items">
+            <span id="current-date"></span>
+            <i class="bi bi-person-circle fs-4 text-primary" style="cursor: pointer;" onclick="logout()" title="Logout"></i>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2 bg-light border-0" type="search" placeholder="Search Product by Name or ID..." aria-label="Search">
+                        <button class="btn btn-primary px-4" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-start border-success border-4">
+                        <div class="card-body text-center p-4">
+                            <h6 class="text-success fw-bold text-uppercase">Top Selling Product</h6>
+                            <h3 class="fw-bold text-dark mt-2">Wireless Headphones</h3>
+                            <p class="text-muted mb-0">Revenue: $15,400 | Quantity: 320</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 border-start border-danger border-4">
+                        <div class="card-body text-center p-4">
+                            <h6 class="text-danger fw-bold text-uppercase">Least Selling Product</h6>
+                            <h3 class="fw-bold text-dark mt-2">Basic Mousepad</h3>
+                            <p class="text-muted mb-0">Revenue: $150 | Quantity: 15</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-4">Product Catalog</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>Category</th>
+                                    <th>Quantity Sold</th>
+                                    <th>Total Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>PROD-9812</td><td>Wireless Headphones</td><td>Electronics</td><td>320</td><td>$15,400.00</td></tr>
+                                <tr><td>PROD-4521</td><td>Cotton T-Shirt</td><td>Clothing</td><td>250</td><td>$5,000.00</td></tr>
+                                <tr><td>PROD-1123</td><td>Coffee Maker</td><td>Home & Kitchen</td><td>120</td><td>$8,400.00</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">RetailIQ © 2026 - Built using Python, Flask, MySQL, SQL, Pandas and Machine Learning</div>
+    </div>
+    <script>document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });</script>
+</body>
+</html>

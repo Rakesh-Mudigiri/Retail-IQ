@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - RetailIQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        if(localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header"><i class="bi bi-graph-up-arrow me-2"></i> RetailIQ</div>
+        <div class="sidebar-nav">
+            <a href="index.html"><i class="bi bi-house"></i> Home</a>
+            <a href="dashboard.html" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a href="upload.html"><i class="bi bi-cloud-upload"></i> Upload Dataset</a>
+            <a href="analytics.html"><i class="bi bi-bar-chart"></i> Analytics</a>
+            <a href="products.html"><i class="bi bi-box"></i> Products</a>
+            <a href="customers.html"><i class="bi bi-people"></i> Customers</a>
+            <a href="prediction.html"><i class="bi bi-cpu"></i> Sales Prediction</a>
+            <a href="reports.html"><i class="bi bi-file-earmark-pdf"></i> Reports</a>
+            <a href="about.html"><i class="bi bi-info-circle"></i> About</a>
+        </div>
+    </div>
+
+    <div class="topbar">
+        <div class="welcome-text">Dashboard Overview</div>
+        <div class="right-items">
+            <span id="current-date"></span>
+            <i class="bi bi-person-circle fs-4 text-primary" style="cursor: pointer;" onclick="logout()" title="Logout"></i>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="page-content">
+            <!-- 6 KPI Cards -->
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <div class="card kpi-card">
+                        <div class="card-body">
+                            <div class="kpi-icon"><i class="bi bi-currency-dollar"></i></div>
+                            <div class="kpi-text"><p>Total Revenue</p><h3>$1,245,670</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card kpi-card">
+                        <div class="card-body">
+                            <div class="kpi-icon"><i class="bi bi-cart"></i></div>
+                            <div class="kpi-text"><p>Total Orders</p><h3>5,432</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card kpi-card">
+                        <div class="card-body">
+                            <div class="kpi-icon"><i class="bi bi-people"></i></div>
+                            <div class="kpi-text"><p>Total Customers</p><h3>1,890</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card kpi-card">
+                        <div class="card-body">
+                            <div class="kpi-icon"><i class="bi bi-box"></i></div>
+                            <div class="kpi-text"><p>Total Products</p><h3>450</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card kpi-card">
+                        <div class="card-body">
+                            <div class="kpi-icon"><i class="bi bi-bag-check"></i></div>
+                            <div class="kpi-text"><p>Avg Order Value</p><h3>$229.32</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card kpi-card">
+                        <div class="card-body">
+                            <div class="kpi-icon"><i class="bi bi-cpu text-success"></i></div>
+                            <div class="kpi-text"><p>Predicted Next Month</p><h3 class="text-success">$145,230</h3></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-4">Monthly Sales Trend</h5>
+                            <canvas id="monthlyTrendChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-4">Top Selling Products</h5>
+                            <canvas id="topProductsChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-4">Category Distribution</h5>
+                            <canvas id="categoryChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-4">Payment Methods</h5>
+                            <canvas id="paymentChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-4">City-wise Sales</h5>
+                            <canvas id="citySalesChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-4">Revenue Growth Trend</h5>
+                            <canvas id="revenueAreaChart" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Sales Table -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5 class="fw-bold">Recent Sales</h5>
+                        <input type="search" class="form-control w-25" placeholder="Search orders...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Order ID <i class="bi bi-arrow-down-up ms-1 text-muted"></i></th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th>Product</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>ORD-10023</td><td>2026-07-11</td><td>Sarah Jenkins</td><td>Wireless Headphones</td><td>$150.00</td><td><span class="badge bg-success">Completed</span></td></tr>
+                                <tr><td>ORD-10024</td><td>2026-07-11</td><td>Michael Chen</td><td>Yoga Mat</td><td>$25.00</td><td><span class="badge bg-success">Completed</span></td></tr>
+                                <tr><td>ORD-10025</td><td>2026-07-10</td><td>Emily Davis</td><td>Coffee Maker</td><td>$85.00</td><td><span class="badge bg-success">Completed</span></td></tr>
+                                <tr><td>ORD-10026</td><td>2026-07-09</td><td>James Wilson</td><td>Cotton T-Shirt</td><td>$20.00</td><td><span class="badge bg-success">Completed</span></td></tr>
+                                <tr><td>ORD-10027</td><td>2026-07-08</td><td>David Clark</td><td>Basic Mousepad</td><td>$15.00</td><td><span class="badge bg-success">Completed</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav>
+                        <ul class="pagination pagination-sm justify-content-end mt-2 mb-0">
+                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            RetailIQ © 2026 - Built using Python, Flask, MySQL, SQL, Pandas and Machine Learning
+        </div>
+    </div>
+
+    <script src="static/js/charts.js"></script>
+    <script>
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        
+        // Dynamic KPI Injector
+        window.addEventListener('DOMContentLoaded', () => {
+            const metricsData = localStorage.getItem('dashboard_metrics');
+            if (metricsData) {
+                const metrics = JSON.parse(metricsData);
+                
+                // Formatters
+                const formatCurrency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format;
+                const formatNumber = new Intl.NumberFormat('en-US').format;
+
+                // Update UI Elements by looking for the sibling <p> tag texts
+                const kpiTexts = document.querySelectorAll('.kpi-text');
+                
+                kpiTexts.forEach(kpi => {
+                    const title = kpi.querySelector('p').textContent.trim();
+                    const valueEl = kpi.querySelector('h3');
+                    
+                    if (title === 'Total Revenue' && metrics.revenue) {
+                        valueEl.textContent = formatCurrency(metrics.revenue);
+                    } else if (title === 'Total Orders' && metrics.orders) {
+                        valueEl.textContent = formatNumber(metrics.orders);
+                    } else if (title === 'Total Customers' && metrics.customers) {
+                        valueEl.textContent = formatNumber(metrics.customers);
+                    } else if (title === 'Total Products' && metrics.products) {
+                        valueEl.textContent = formatNumber(metrics.products);
+                    } else if (title === 'Avg Order Value' && metrics.revenue && metrics.orders) {
+                        valueEl.textContent = formatCurrency(metrics.revenue / metrics.orders);
+                    } else if (title === 'Predicted Next Month' && metrics.revenue) {
+                        valueEl.textContent = formatCurrency(metrics.revenue * 1.15); // Simple +15% prediction
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

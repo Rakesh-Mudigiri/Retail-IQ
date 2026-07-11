@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - RetailIQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header"><i class="bi bi-graph-up-arrow me-2"></i> RetailIQ</div>
+        <div class="sidebar-nav">
+            <a href="/" class="active"><i class="bi bi-house"></i> Home</a>
+            <a href="/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a href="/upload"><i class="bi bi-cloud-upload"></i> Upload Dataset</a>
+            <a href="/analytics"><i class="bi bi-bar-chart"></i> Analytics</a>
+            <a href="/products"><i class="bi bi-box"></i> Products</a>
+            <a href="/customers"><i class="bi bi-people"></i> Customers</a>
+            <a href="/prediction"><i class="bi bi-cpu"></i> Sales Prediction</a>
+            <a href="/reports"><i class="bi bi-file-earmark-pdf"></i> Reports</a>
+            <a href="/about"><i class="bi bi-info-circle"></i> About</a>
+        </div>
+    </div>
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="welcome-text">RetailIQ &ndash; Smart Retail Analytics</div>
+        <div class="right-items">
+            <span id="current-date"></span>
+            {% if session.get('user_id') %}
+                <a href="/logout" title="Logout" class="btn btn-outline-danger btn-sm ms-3"><i class="bi bi-box-arrow-right"></i> Logout</a>
+            {% else %}
+                <a href="/login" class="btn btn-primary btn-sm ms-3"><i class="bi bi-person-circle"></i> Login</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="card p-5 text-center mt-4">
+                <h1 class="display-5 fw-bold text-dark mb-3">Empowering Smarter Retail Decisions</h1>
+                <p class="lead text-muted mb-5">Upload your raw CSV data and instantly generate business insights,
+                    dashboards, and ML sales predictions.</p>
+                <div class="row justify-content-center mb-5">
+                    <div class="col-md-3">
+                        <div class="p-3 bg-light rounded-4">
+                            <i class="bi bi-magic display-4 text-primary mb-2"></i>
+                            <h5>Automated ETL</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-light rounded-4">
+                            <i class="bi bi-pie-chart display-4 text-primary mb-2"></i>
+                            <h5>Visual Analytics</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 bg-light rounded-4">
+                            <i class="bi bi-cpu display-4 text-primary mb-2"></i>
+                            <h5>ML Prediction</h5>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    {% if session.get('user_id') %}
+                        <a href="/upload" class="btn btn-primary btn-lg px-4 me-2"><i class="bi bi-upload"></i> Upload Dataset</a>
+                        <a href="/dashboard" class="btn btn-outline-secondary btn-lg px-4">View Dashboard</a>
+                    {% else %}
+                        <a href="/login" class="btn btn-primary btn-lg px-4 me-2"><i class="bi bi-person-circle"></i> Login to Upload</a>
+                        <a href="/login" class="btn btn-outline-secondary btn-lg px-4">Login to View Dashboard</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            RetailIQ &copy; 2026 - Built using Python, Flask, MySQL, SQL, Pandas and Machine Learning
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    </script>
+</body>
+</html>
